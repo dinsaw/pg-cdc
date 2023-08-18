@@ -89,11 +89,11 @@ public class Configuration {
     }
 
     public String getKinesisAwsRegion() {
-        return configProperties.getProperty(PropertyNames.PRODUCER_KAFKA_RETRIES);
+        return configProperties.getProperty(PropertyNames.PRODUCER_KINESIS_AWS_REGION);
     }
 
     public String getKinesisStreamName() {
-        return configProperties.getProperty(PropertyNames.PRODUCER_KAFKA_LINGER_MS);
+        return configProperties.getProperty(PropertyNames.PRODUCER_KINESIS_STREAM_NAME);
     }
 
     public String getKinesisMetricLevel() {
