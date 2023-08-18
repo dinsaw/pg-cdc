@@ -1,0 +1,6 @@
+.gradle
+build
+.idea
+/lombok.config
+/state.json
+logs

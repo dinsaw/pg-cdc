@@ -1,0 +1,141 @@
+#Insert
+insert into students values (2, 'Ak');
+
+{
+	"xid": 683,
+	"change": [
+		{
+			"kind": "insert",
+			"schema": "public",
+			"table": "students",
+			"columnnames": ["id", "name"],
+			"columntypes": ["integer", "character varying(255)"],
+			"columnvalues": [2, "Ak"]
+		}
+	]
+}
+
+#update
+update students set name = 'ABC' where id = 2;
+
+{
+	"xid": 684,
+	"change": [
+		{
+			"kind": "update",
+			"schema": "public",
+			"table": "students",
+			"columnnames": ["id", "name"],
+			"columntypes": ["integer", "character varying(255)"],
+			"columnvalues": [2, "ABC"],
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [2]
+			}
+		}
+	]
+}
+
+Transaction:
+begin;
+update students set name = 'dinsaw' where id = 1;
+update students set name = 'ab' where id = 2;
+update student_admissions set standard = '10' where id =1;
+commit;
+
+{
+	"xid": 687,
+	"change": [
+		{
+			"kind": "update",
+			"schema": "public",
+			"table": "students",
+			"columnnames": ["id", "name"],
+			"columntypes": ["integer", "character varying(255)"],
+			"columnvalues": [1, "dinsaw"],
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [1]
+			}
+		}
+		,{
+			"kind": "update",
+			"schema": "public",
+			"table": "students",
+			"columnnames": ["id", "name"],
+			"columntypes": ["integer", "character varying(255)"],
+			"columnvalues": [2, "ab"],
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [2]
+			}
+		}
+		,{
+			"kind": "update",
+			"schema": "public",
+			"table": "student_admissions",
+			"columnnames": ["id", "student_id", "standard"],
+			"columntypes": ["integer", "integer", "character varying(255)"],
+			"columnvalues": [1, 1, "10"],
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [1]
+			}
+		}
+	]
+}
+
+begin;
+delete from student_admissions where student_id = 1;
+delete from students where id=1;
+commit;
+
+{
+	"xid": 689,
+	"change": [
+		{
+			"kind": "delete",
+			"schema": "public",
+			"table": "student_admissions",
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [1]
+			}
+		}
+		,{
+			"kind": "delete",
+			"schema": "public",
+			"table": "students",
+			"oldkeys": {
+				"keynames": ["id"],
+				"keytypes": ["integer"],
+				"keyvalues": [1]
+			}
+		}
+	]
+}
+
+
+With Timestamp
+insert into students values (3, 'Bk');
+
+{
+	"xid": 703,
+	"timestamp": "2020-02-05 17:47:41.637863+05:30",
+	"change": [
+		{
+			"kind": "insert",
+			"schema": "public",
+			"table": "students",
+			"columnnames": ["id", "name"],
+			"columntypes": ["integer", "character varying(255)"],
+			"columnvalues": [3, "Bk"]
+		}
+	]
+}
+LastReceivedLSN =LSN{0/17A1B80}

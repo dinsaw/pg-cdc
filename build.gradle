@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+}
+
+group 'com.dineshsawant'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.10'
+
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.2'
+
+    compile "com.google.flogger:flogger:0.4"
+    compile "com.google.flogger:flogger-system-backend:0.4"
+    compile "com.google.flogger:flogger-slf4j-backend:0.4"
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+    compile group: 'io.vertx', name: 'vertx-core', version: '3.8.5'
+
+    compile "com.squareup.okhttp3:okhttp:4.4.0"
+
+    compile 'com.amazonaws:amazon-kinesis-producer:0.14.0'
+
+    compile platform('software.amazon.awssdk:bom:2.11.1')
+    compile 'software.amazon.awssdk:kinesis'
+
+    // Required Above Java8
+    compile "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    compile "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+
+    compile "org.apache.kafka:kafka-clients:2.7.0"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'com.dineshsawant.pg.cdc.Main'
+    }
+    baseName = 'pg-cdc'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+test {
+    systemProperty "user.timezone", "UTC"
+}

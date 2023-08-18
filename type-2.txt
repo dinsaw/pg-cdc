@@ -1,0 +1,208 @@
+#Insert
+insert into students values (2, 'Ak');
+
+{"action":"B","xid":694}
+{
+  "action": "I",
+  "xid": 694,
+  "schema": "public",
+  "table": "students",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    },
+    {
+      "name": "name",
+      "type": "character varying(255)",
+      "value": "Ak"
+    }
+  ]
+}{"action":"C","xid":694}
+
+#update
+update students set name = 'ABC' where id = 2;
+
+{"action":"B","xid":695}
+{
+  "action": "U",
+  "xid": 695,
+  "schema": "public",
+  "table": "students",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    },
+    {
+      "name": "name",
+      "type": "character varying(255)",
+      "value": "ABC"
+    }
+  ],
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    }
+  ]
+}
+{"action":"C","xid":695}
+
+Transaction:
+begin;
+update students set name = 'dinsaw' where id = 1;
+update students set name = 'ab' where id = 2;
+update student_admissions set standard = '10' where id =1;
+commit;
+
+{"action":"B","xid":696}
+{
+  "action": "U",
+  "xid": 696,
+  "schema": "public",
+  "table": "students",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    },
+    {
+      "name": "name",
+      "type": "character varying(255)",
+      "value": "dinsaw"
+    }
+  ],
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    }
+  ]
+}
+{
+  "action": "U",
+  "xid": 696,
+  "schema": "public",
+  "table": "students",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    },
+    {
+      "name": "name",
+      "type": "character varying(255)",
+      "value": "ab"
+    }
+  ],
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    }
+  ]
+}
+{
+  "action": "U",
+  "xid": 696,
+  "schema": "public",
+  "table": "student_admissions",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    },
+    {
+      "name": "student_id",
+      "type": "integer",
+      "value": 1
+    },
+    {
+      "name": "standard",
+      "type": "character varying(255)",
+      "value": "10"
+    }
+  ],
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    }
+  ]
+}
+{"action":"C","xid":696}
+
+begin;
+delete from student_admissions where student_id = 1;
+delete from students where id=1;
+commit;
+
+{"action":"B","xid":697}
+{
+  "action": "D",
+  "xid": 697,
+  "schema": "public",
+  "table": "student_admissions",
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    }
+  ]
+}
+{
+  "action": "D",
+  "xid": 697,
+  "schema": "public",
+  "table": "students",
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 1
+    }
+  ]
+}
+{"action":"C","xid":697}
+
+
+With Timestamp:
+{"action":"B","xid":699,"timestamp":"2020-02-05 17:28:00.45968+05:30"}
+{
+  "action": "U",
+  "xid": 699,
+  "timestamp": "2020-02-05 17:28:00.45968+05:30",
+  "schema": "public",
+  "table": "students",
+  "columns": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    },
+    {
+      "name": "name",
+      "type": "character varying(255)",
+      "value": "ABC"
+    }
+  ],
+  "identity": [
+    {
+      "name": "id",
+      "type": "integer",
+      "value": 2
+    }
+  ]
+}
+{"action":"C","xid":699,"timestamp":"2020-02-05 17:28:00.45968+05:30"}

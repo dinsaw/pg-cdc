@@ -1,0 +1,13 @@
+[Unit]
+Description=Postgres CDC Service
+
+[Service]
+WorkingDirectory=/opt/prod/pg-cdc
+ExecStart=/usr/bin/java -Xmx800m -Duser.timezone=UTC -Dflogger.backend_factory=com.google.common.flogger.backend.slf4j.Slf4jBackendFactory#getInstance -jar pg-cdc-1.0-SNAPSHOT.jar config.properties
+User=jvmapps
+Type=simple
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
