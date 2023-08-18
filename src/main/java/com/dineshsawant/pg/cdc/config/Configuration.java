@@ -85,7 +85,7 @@ public class Configuration {
     }
 
     public String getStateStoreJsonFilePath() {
-        return configProperties.getProperty(PropertyNames.PRODUCER_KAFKA_BOOTSTRAP_SERVERS, "state.json");
+        return configProperties.getProperty(PropertyNames.STATE_STORE_JSONFILE_PATH, "state.json");
     }
 
     public String getKinesisAwsRegion() {
